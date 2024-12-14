@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PagesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [PagesController::class, 'index'])->name('home');
+Route::get('/about', [PagesController::class, 'about'])->name('about');
+Route::get('/our-work', [PagesController::class, 'ourWork'])->name('our-work');
+Route::get('/contact', [PagesController::class, 'contact'])->name('contact');
