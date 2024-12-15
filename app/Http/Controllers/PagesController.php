@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\BestSeller;
 use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
     public function index()
     {
-        return view('home');
+        $bestseller = BestSeller::all()->take(6);
+        return view('home', compact('bestseller'));
     }
 
     public function about()

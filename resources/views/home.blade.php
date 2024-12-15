@@ -31,13 +31,13 @@
 
                     <div class="space-x-4">
                         <a 
-                            href="/portfolio" 
+                            href="{{route('our-work')}}" 
                             class="inline-block bg-white text-black px-8 py-3 text-lg font-semibold hover:bg-gray-100 transition-colors duration-300"
                         >
-                            View Portfolio
+                            View Our Work
                         </a>
                         <a 
-                            href="/contact" 
+                            href="{{route('contact')}}" 
                             class="inline-block border-2 border-white text-white px-8 py-3 text-lg font-semibold hover:bg-white hover:text-black transition-colors duration-300"
                         >
                             Book Consultation
@@ -84,81 +84,54 @@
             </div>
 
             <!-- Products Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-                <!-- Product 1 -->
-                <div class="group">
-                    <div class="relative overflow-hidden">
-                        <img 
-                            src="{{ asset('images/product1.jpg') }}" 
-                            alt="Fashion Item 1" 
-                            class="w-full h-[400px] object-cover"
-                        >
-                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300">
-                            <div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                                <button class="w-full bg-white text-black py-2 hover:bg-gray-100">
-                                    View Details
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <h3 class="text-xl font-semibold">Evening Elegance</h3>
-                        <p class="text-gray-600">Custom Evening Gown</p>
-                    </div>
-                </div>
+            <div class="container px-4 py-8 mx-auto">
+                <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
+                    @foreach($bestseller as $bestseller)
+                 
+                        <!-- Product Card -->
+                        <div class="overflow-hidden transition-shadow duration-300 border border-gray-200 rounded-lg shadow-sm hover:shadow-lg">
+                            <!-- Product Image -->
+                            <div class="relative h-[400px]"> <!-- Fixed height for consistent sizing -->
+                                <img 
+                                    src="{{ asset('storage/' . $bestseller->image) }}"
+                                    alt="{{ $bestseller->name }}"
+                                    class="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105">
 
-                <!-- Product 2 -->
-                <div class="group">
-                    <div class="relative overflow-hidden">
-                        <img 
-                            src="{{ asset('images/product2.jpg') }}" 
-                            alt="Fashion Item 2" 
-                            class="w-full h-[400px] object-cover"
-                        >
-                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300">
-                            <div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                                <button class="w-full bg-white text-black py-2 hover:bg-gray-100">
-                                    View Details
-                                </button>
+                            
                             </div>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <h3 class="text-xl font-semibold">Business Chic</h3>
-                        <p class="text-gray-600">Tailored Suit Set</p>
-                    </div>
-                </div>
 
-                <!-- Product 3 -->
-                <div class="group">
-                    <div class="relative overflow-hidden">
-                        <img 
-                            src="{{ asset('images/product3.jpg') }}" 
-                            alt="Fashion Item 3" 
-                            class="w-full h-[400px] object-cover"
-                        >
-                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300">
-                            <div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                                <button class="w-full bg-white text-black py-2 hover:bg-gray-100">
-                                    View Details
-                                </button>
+                            <!-- Product Info -->
+                            <div class="p-6"> <!-- Increased padding for better spacing -->
+                                <h3 class="mb-3 text-xl font-semibold">{{ $bestseller->name }}</h3>
+                                <p class="mb-4 text-sm text-gray-600 line-clamp-3">{!! $bestseller->description !!}</p>
+                                <div class="flex flex-col space-y-3">
+                                    <span class="text-2xl font-bold">M{{ number_format($bestseller->price, 2) }}</span>
+                                    <a 
+                                        href="{{ route('contact') }}" 
+                                        class="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-white transition-colors bg-black hover:bg-gray-800">
+                                        Contact us to buy
+                                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                                        </svg>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="mt-4">
-                        <h3 class="text-xl font-semibold">Modern Classic</h3>
-                        <p class="text-gray-600">Designer Dress</p>
-                    </div>
+                    
+                    @endforeach
                 </div>
             </div>
+
+     
+    </div>
 
             <!-- View All Button -->
             <div class="text-center mt-16">
                 <a 
-                    href="/collection" 
+                    href="{{route('our-work')}}" 
                     class="inline-block border-2 border-black text-black px-8 py-3 text-lg font-semibold hover:bg-black hover:text-white transition-colors duration-300"
                 >
-                    View Full Collection
+                    View Full Products
                 </a>
             </div>
         </div>
@@ -243,7 +216,7 @@
             <!-- CTA -->
             <div class="text-center mt-16">
                 <a 
-                    href="/consultation" 
+                    href="{{route('contact')}}" 
                     class="inline-block border-2 border-black text-black px-8 py-3 text-lg font-semibold hover:bg-black hover:text-white transition-colors duration-300"
                 >
                     Book Your Consultation
